@@ -1,0 +1,58 @@
+{
+  "name": "bitcoin-converter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "./index.js",
+  "scripts": {
+    "prepush": "npm run test:coverage",
+    "test": "jest",
+    "test:tdd": "jest --watchAll",
+    "test:coverage": "jest --coverage",
+    "build": "npm run clear && ./node_modules/.bin/babel --out-dir lib src",
+    "build:umd": "./node_modules/.bin/webpack --output-filename spotify-wrapper.umd.js",
+    "build:umd:min": "./node_modules/.bin/webpack --output-filename spotify-wrapper.umd.min.js -p",
+    "build:all": "npm run build && npm run build:umd && npm run build:umd:min",
+    "build:watch": "npm run clear && npm run build -- --watch --source-maps",
+    "clear": "rimraf lib",
+    "coveralls": "jest --coverage --coverageReporters=text-lcov | coveralls"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "btc-converter": "bin/main.js"
+  },
+  "jest": {
+    "coverageReporters": [
+      "text",
+      "html"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "functions": 80,
+        "lines": 80
+      }
+    }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.4",
+    "@babel/node": "^7.8.4",
+    "@babel/preset-env": "^7.8.4",
+    "babel-jest": "^25.1.0",
+    "babel-loader": "^8.0.6",
+    "coveralls": "^3.0.9",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "husky": "^4.2.3",
+    "jest": "^25.1.0",
+    "rimraf": "^3.0.2",
+    "webpack": "^4.41.6",
+    "webpack-cli": "^3.3.11"
+  },
+  "dependencies": {
+    "axios": "^0.19.2"
+  }
+}
